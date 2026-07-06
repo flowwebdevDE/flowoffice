@@ -65,7 +65,7 @@
       </div>
 
       <div class="sidebar-footer">
-        <p>Version 2.2</p>
+        <p>powered by <a href="flowwebdesign.de">FlowWebDesign</a></p>
         <button class="btn theme-toggle" id="themeToggleBtn">
           <svg viewBox="0 0 20 20" fill="currentColor" style="width:16px;height:16px;margin-right:8px;">
             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
@@ -123,7 +123,7 @@
             <span class="workflow-dot"></span>
             <span>Erledigt</span>
           </button>
-          <button type="button" class="workflow-step" style="color: rgb(255, 57, 57);" data-doc-status-step="Storniert">
+          <button type="button" class="workflow-step" data-doc-status-step="Storniert">
             <span class="workflow-dot"></span>
             <span>Storniert</span>
           </button>
@@ -400,54 +400,206 @@
       </section>
 
       <section id="settingsView" class="hidden">
-        <div class="panel">
-          <div class="panel-header">
+        <div class="settings-shell">
+          <header class="settings-hero">
             <div>
-              <h3>Stammdaten</h3>
+              <button class="settings-back" type="button" data-settings-view="editor">
+                <span aria-hidden="true">←</span>
+                Zurück zur App
+              </button>
+              <h2>FlowOffice Einstellungen</h2>
+              <p>Zentrale Verwaltung für Firmendaten, Backups, Module, Automationen und lokale App-Informationen.</p>
             </div>
-          </div>
-          <div class="panel-body">
-            <div class="form-grid">
-              <div class="field full">
-                <label>Firmenlogo</label>
-                <input type="file" id="logoInput" accept="image/*" />
-                <p class="mini-note">Wird lokal gespeichert und auf dem Dokument angezeigt.</p>
-              </div>
-              <div class="field full">
-                <label for="companyName">Firmenname</label>
-                <input id="companyName" placeholder="Dein Firmenname" />
-              </div>
-              <div class="field full">
-                <label for="companyAddress">Firmenadresse</label>
-                <textarea id="companyAddress" placeholder="Straße, PLZ Ort"></textarea>
-              </div>
-              <div class="field">
-                <label for="companyEmail">E-Mail</label>
-                <input id="companyEmail" placeholder="mail@firma.de" />
-              </div>
-              <div class="field">
-                <label for="companyPhone">Telefon</label>
-                <input id="companyPhone" placeholder="+49 ..." />
-              </div>
-              <div class="field">
-                <label for="companyTaxId">Steuernummer / USt-ID</label>
-                <input id="companyTaxId" placeholder="Optional" />
-              </div>
-              <div class="field">
-                <label for="companyIban">IBAN</label>
-                <input id="companyIban" placeholder="Optional" />
-              </div>
-              <div class="field full">
-                <label for="companyExtra">Zusatzinfo</label>
-                <textarea id="companyExtra" placeholder="z. B. Inhaber, Bank, Hinweise"></textarea>
-              </div>
+            <div class="settings-version-card">
+              <span>Aktuelle Version</span>
+              <strong id="settingsVersion">2.4</strong>
+              <small>Lokale Business-Workspace Edition</small>
             </div>
-            <div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
-              <button class="btn primary" id="saveSettingsBtn">Firmendaten speichern</button>
-              <button class="btn" id="exportBackupBtn">Backup (JSON)</button>
-              <button class="btn" id="importBackupBtn">Import (JSON)</button>
-              <input type="file" id="importBackupInput" accept=".json" style="display:none">
-              <button class="btn danger" id="resetAllBtn">Alles zurücksetzen</button>
+          </header>
+
+          <div class="settings-layout">
+            <aside class="settings-nav-panel" aria-label="Einstellungsbereiche">
+              <button type="button" data-settings-anchor="settings-company" class="active">
+                <span>01</span>
+                Stammdaten
+              </button>
+              <button type="button" data-settings-anchor="settings-data">
+                <span>02</span>
+                Daten & Backup
+              </button>
+              <button type="button" data-settings-anchor="settings-platform">
+                <span>03</span>
+                Plattform
+              </button>
+              <button type="button" data-settings-anchor="settings-maintenance">
+                <span>04</span>
+                Wartung
+              </button>
+            </aside>
+
+            <div class="settings-content">
+              <section class="settings-band settings-overview" aria-label="Systemübersicht">
+                <div>
+                  <span class="settings-kicker">Status</span>
+                  <h3>Dein lokaler Workspace</h3>
+                  <p>Alle Kernbereiche bleiben browserlokal gespeichert und sind über JSON-Backups exportierbar.</p>
+                </div>
+                <div class="settings-metrics">
+                  <div>
+                    <strong id="settingsDocCount">0</strong>
+                    <span>Dokumente</span>
+                  </div>
+                  <div>
+                    <strong id="settingsClientCount">0</strong>
+                    <span>Kunden</span>
+                  </div>
+                  <div>
+                    <strong id="settingsModuleCount">0</strong>
+                    <span>Module</span>
+                  </div>
+                  <div>
+                    <strong id="settingsAutomationCount">0</strong>
+                    <span>Automationen</span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="settings-section" id="settings-company">
+                <div class="settings-section-head">
+                  <div>
+                    <span class="settings-kicker">Firmendaten</span>
+                    <h3>Standardangaben für Dokumente</h3>
+                  </div>
+                  <button class="btn primary" id="saveSettingsBtn">Firmendaten speichern</button>
+                </div>
+
+                <div class="settings-card">
+                  <div class="form-grid">
+                    <div class="field full">
+                      <label>Firmenlogo</label>
+                      <input type="file" id="logoInput" accept="image/*" />
+                      <p class="mini-note">Wird lokal gespeichert und automatisch auf neuen Dokumenten angezeigt.</p>
+                    </div>
+                    <div class="field full">
+                      <label for="companyName">Firmenname</label>
+                      <input id="companyName" placeholder="Dein Firmenname" />
+                    </div>
+                    <div class="field full">
+                      <label for="companyAddress">Firmenadresse</label>
+                      <textarea id="companyAddress" placeholder="Straße, PLZ Ort"></textarea>
+                    </div>
+                    <div class="field">
+                      <label for="companyEmail">E-Mail</label>
+                      <input id="companyEmail" placeholder="mail@firma.de" />
+                    </div>
+                    <div class="field">
+                      <label for="companyPhone">Telefon</label>
+                      <input id="companyPhone" placeholder="+49 ..." />
+                    </div>
+                    <div class="field">
+                      <label for="companyTaxId">Steuernummer / USt-ID</label>
+                      <input id="companyTaxId" placeholder="Optional" />
+                    </div>
+                    <div class="field">
+                      <label for="companyIban">IBAN</label>
+                      <input id="companyIban" placeholder="Optional" />
+                    </div>
+                    <div class="field full">
+                      <label for="companyExtra">Zusatzinfo</label>
+                      <textarea id="companyExtra" placeholder="z. B. Inhaber, Bank, Hinweise"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="settings-section" id="settings-data">
+                <div class="settings-section-head">
+                  <div>
+                    <span class="settings-kicker">Sicherung</span>
+                    <h3>Daten & Backup</h3>
+                  </div>
+                  <div class="settings-actions">
+                    <button class="btn" id="exportBackupBtn">Backup exportieren</button>
+                    <button class="btn" id="importBackupBtn">Backup importieren</button>
+                    <input type="file" id="importBackupInput" accept=".json" style="display:none">
+                  </div>
+                </div>
+
+                <div class="settings-grid">
+                  <div class="settings-card">
+                    <h4>Backup-Umfang</h4>
+                    <p>Export enthält Dokumente, Kunden, Firmendaten, Module, sichtbare Erweiterungen, Automationen und eigene Code-Blöcke.</p>
+                    <div class="settings-list">
+                      <div><span>Format</span><strong>JSON</strong></div>
+                      <div><span>Kompatibilität</span><strong>v4+</strong></div>
+                      <div><span>Speicherort</span><strong>Browser lokal</strong></div>
+                    </div>
+                  </div>
+                  <div class="settings-card">
+                    <h4>Lokaler Speicher</h4>
+                    <p>Hilft dir einzuschätzen, wie viel Daten aktuell in diesem Browser liegen.</p>
+                    <div class="settings-storage-meter">
+                      <div id="settingsStorageBar"></div>
+                    </div>
+                    <strong id="settingsStorageSize">0 KB</strong>
+                  </div>
+                </div>
+              </section>
+
+              <section class="settings-section" id="settings-platform">
+                <div class="settings-section-head">
+                  <div>
+                    <span class="settings-kicker">System</span>
+                    <h3>Plattform & Erweiterungen</h3>
+                  </div>
+                  <button class="btn" id="settingsThemeToggleBtn">Design wechseln</button>
+                </div>
+
+                <div class="settings-grid">
+                  <div class="settings-card">
+                    <h4>Versionsinfo</h4>
+                    <div class="settings-list">
+                      <div><span>App</span><strong>FlowOffice</strong></div>
+                      <div><span>Version</span><strong id="settingsVersionInline">2.4</strong></div>
+                      <div><span>Backup-Schema</span><strong>4</strong></div>
+                      <div><span>Modul-System</span><strong>Aktiv</strong></div>
+                    </div>
+                  </div>
+                  <div class="settings-card">
+                    <h4>Erweiterbarkeit</h4>
+                    <p>Eigene Module, Listen, Tabellen und Automation-Blöcke werden über die lokale FlowModules- und FlowActions-Struktur eingebunden.</p>
+                    <div class="settings-list">
+                      <div><span>Registrierte Module</span><strong id="settingsRegisteredModules">0</strong></div>
+                      <div><span>Eigene Code-Blöcke</span><strong id="settingsCodeActionCount">0</strong></div>
+                      <div><span>Sandbox</span><strong>Vorbereitet</strong></div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="settings-section" id="settings-maintenance">
+                <div class="settings-section-head">
+                  <div>
+                    <span class="settings-kicker">Pflege</span>
+                    <h3>Wartung & Schnellzugriff</h3>
+                  </div>
+                  <button class="btn danger" id="resetAllBtn">Alles zurücksetzen</button>
+                </div>
+
+                <div class="settings-grid">
+                  <div class="settings-card settings-shortcuts">
+                    <h4>Schnell weiterarbeiten</h4>
+                    <button class="btn" type="button" data-settings-view="editor">Editor öffnen</button>
+                    <button class="btn" type="button" data-settings-view="documents">Dokumente prüfen</button>
+                    <button class="btn" type="button" data-settings-view="clients">Kunden verwalten</button>
+                  </div>
+                  <div class="settings-card">
+                    <h4>Hinweise</h4>
+                    <p>Die App arbeitet lokal in deinem Browser. Für Wechsel auf ein anderes Gerät erst ein Backup exportieren und dort wieder importieren.</p>
+                    <p class="mini-note">Reset löscht nur lokale FlowOffice-Daten dieses Browsers.</p>
+                  </div>
+                </div>
+              </section>
             </div>
           </div>
         </div>

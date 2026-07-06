@@ -2,7 +2,7 @@
 @media screen and (max-width: 768px) {
   :root {
     --safe-bottom: env(safe-area-inset-bottom, 16px);
-    --nav-height: 76px;
+    --nav-height: 72px;
     --mobile-shell-gap: 12px;
     --mobile-action-height: 70px;
   }
@@ -56,8 +56,8 @@
     position: fixed;
     top: auto !important;
     bottom: calc(var(--safe-bottom) + 8px);
-    left: 10px;
-    right: 10px;
+    left: 12px;
+    right: 12px;
     width: auto !important;
     height: var(--nav-height) !important;
     background: var(--p-surface);
@@ -67,8 +67,8 @@
     flex-direction: row !important;
     padding: 8px !important;
     z-index: 1000;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
-    border-radius: 26px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+    border-radius: 20px;
     backdrop-filter: blur(18px);
     overflow: hidden;
   }
@@ -104,14 +104,14 @@
   .nav button {
     flex-direction: column !important;
     flex: 0 0 auto;
-    min-width: 74px;
-    max-width: 96px;
+    min-width: 72px;
+    max-width: 104px;
     font-size: 10px;
     line-height: 1.1;
     font-weight: 700;
     gap: 4px;
     padding: 6px 8px !important;
-    border-radius: 18px;
+    border-radius: 14px;
     background: transparent !important;
     color: var(--p-text-subdued);
     align-items: center !important;
@@ -125,7 +125,7 @@
   .nav button.active {
     color: var(--p-text-on-primary);
     background: var(--p-primary) !important;
-    box-shadow: 0 6px 18px rgba(0, 128, 96, 0.28) !important;
+    box-shadow: 0 5px 14px rgba(0, 128, 96, 0.24) !important;
   }
 
   .nav button svg {
@@ -157,7 +157,7 @@
     background: color-mix(in srgb, var(--p-bg) 92%, transparent) !important;
     border-bottom: 1px solid var(--p-border);
     margin: -16px -16px 18px -16px !important;
-    padding: 14px 16px 12px 16px !important;
+    padding: 12px 16px !important;
     display: flex;
     flex-direction: column;
     align-items: flex-start !important;
@@ -226,16 +226,16 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 8px;
     position: fixed;
-    left: 10px;
-    right: 10px;
+    left: 12px;
+    right: 12px;
     bottom: calc(var(--nav-height) + var(--safe-bottom) + 18px);
     z-index: 1001;
     padding: 10px;
     border: 1px solid var(--p-border);
-    border-radius: 22px;
+    border-radius: 18px;
     background: var(--p-surface);
     background: color-mix(in srgb, var(--p-surface) 96%, transparent);
-    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
     backdrop-filter: blur(18px);
   }
 
@@ -248,7 +248,7 @@
     height: 46px;
     font-size: 13px;
     font-weight: 600;
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 0 8px;
   }
 
@@ -265,7 +265,7 @@
   }
 
   .panel {
-    border-radius: 20px !important;
+    border-radius: 14px !important;
     border: none !important;
     box-shadow: var(--p-shadow-card);
     width: 100% !important;
@@ -274,7 +274,7 @@
   }
 
   .panel-header {
-    padding: 16px;
+    padding: 14px;
     background: var(--p-surface);
     border-bottom: 1px solid var(--p-bg);
     gap: 12px;
@@ -303,7 +303,7 @@
   }
 
   .panel-body {
-    padding: 18px 16px !important;
+    padding: 16px !important;
   }
 
   /* Strikte Stapelung der Formular-Felder */
@@ -326,7 +326,7 @@
   textarea {
     font-size: 16px !important;
     height: 48px !important;
-    border-radius: 14px !important;
+    border-radius: 10px !important;
     border: 1px solid var(--p-border) !important;
     background: var(--p-bg) !important;
     padding: 0 16px !important;
@@ -354,9 +354,9 @@
     display: flex !important;
     flex-direction: column !important;
     gap: 14px !important;
-    padding: 18px !important;
+    padding: 14px !important;
     background: var(--p-surface);
-    border-radius: 20px !important;
+    border-radius: 14px !important;
     margin-bottom: 16px !important;
     box-shadow: var(--p-shadow-card) !important;
     border: 1px solid var(--p-border) !important;
@@ -385,7 +385,7 @@
   }
 
   .doc-card {
-    border-radius: 20px !important;
+    border-radius: 14px !important;
     box-shadow: var(--p-shadow-card);
     background: var(--p-surface);
     padding: 18px !important;
@@ -406,7 +406,7 @@
   .workflow-strip {
     display: grid !important;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(116px, 1fr);
+    grid-auto-columns: minmax(112px, 1fr);
     grid-template-columns: none !important;
     gap: 8px !important;
     overflow-x: auto;
@@ -422,7 +422,7 @@
   }
 
   .workflow-step {
-    border-radius: 16px !important;
+    border-radius: 12px !important;
     min-height: 44px !important;
     font-size: 13px !important;
     scroll-snap-align: start;
@@ -494,7 +494,7 @@
 
   .automation-block-main {
     padding: 12px !important;
-    border-radius: 18px !important;
+    border-radius: 14px !important;
   }
 
   .automation-block-head,
@@ -540,7 +540,7 @@
   .modal-container {
     width: 100vw !important;
     height: min(92vh, 820px) !important;
-    border-radius: 24px 24px 0 0 !important;
+    border-radius: 18px 18px 0 0 !important;
   }
 
   .modal-header {
@@ -582,5 +582,492 @@
     justify-content: center;
     border-radius: 16px !important;
     text-align: center;
+  }
+}
+
+/* FlowOffice Mobile Shell Refresh 2026
+   Clean app flow: navigation first, content second, no floating control bars. */
+@media screen and (max-width: 768px) {
+  :root {
+    --mobile-pad: 14px;
+    --mobile-nav-height: 64px;
+    --safe-bottom: env(safe-area-inset-bottom, 16px);
+  }
+
+  body {
+    overflow-x: hidden !important;
+    background: var(--fo-bg, #f5f6f8) !important;
+  }
+
+  .app {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    overflow-x: hidden !important;
+    background: var(--fo-bg, #f5f6f8) !important;
+  }
+
+  aside.sidebar {
+    position: sticky !important;
+    inset: 0 auto auto 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: var(--mobile-nav-height) !important;
+    padding: 8px 10px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--fo-line, var(--p-border)) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: var(--fo-surface, var(--p-surface)) !important;
+    z-index: 1100 !important;
+    overflow: visible !important;
+  }
+
+  .sidebar .brand,
+  .sidebar-footer,
+  .sidebar-footer-card {
+    display: none !important;
+  }
+
+  .nav {
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: minmax(68px, 1fr) !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 48px !important;
+    gap: 6px !important;
+    padding: 0 !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .nav button {
+    width: auto !important;
+    min-width: 68px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 5px 6px !important;
+    border-radius: 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    font-size: 11px !important;
+    line-height: 1.1 !important;
+    white-space: normal !important;
+    text-align: center !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .nav button .nav-icon {
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0 !important;
+    flex: 0 0 auto !important;
+  }
+
+  .nav button .nav-label {
+    display: block !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .nav button.active {
+    background: var(--fo-ink, var(--p-text)) !important;
+    color: #fff !important;
+  }
+
+  .main {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: var(--mobile-pad) !important;
+    padding-bottom: calc(24px + var(--safe-bottom)) !important;
+    gap: 14px !important;
+    overflow: visible !important;
+  }
+
+  .app:has(.nav button[data-view="editor"].active) .main {
+    padding-bottom: calc(24px + var(--safe-bottom)) !important;
+  }
+
+  .topbar {
+    position: static !important;
+    top: auto !important;
+    z-index: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    min-height: 0 !important;
+    margin: 0 0 14px 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+  }
+
+  .global-search-wrapper {
+    display: flex !important;
+    width: 100% !important;
+  }
+
+  .app:has(.nav button[data-view="editor"].active) .global-search-wrapper {
+    display: none !important;
+  }
+
+  .topbar .actions,
+  .actions#topActions:not(.hidden) {
+    position: static !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    gap: 8px !important;
+  }
+
+  .topbar .actions.hidden,
+  .actions#topActions.hidden {
+    display: none !important;
+  }
+
+  .topbar .actions .btn,
+  .actions#topActions .btn {
+    width: 100% !important;
+    min-height: 42px !important;
+    padding: 0 8px !important;
+    border-radius: 10px !important;
+    font-size: 12px !important;
+    white-space: normal !important;
+  }
+
+  .view {
+    gap: 14px !important;
+  }
+
+  .panel {
+    padding: 14px !important;
+    border-radius: 12px !important;
+    box-shadow: var(--fo-shadow, var(--p-shadow-card)) !important;
+    overflow: visible !important;
+  }
+
+  .panel-header {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    align-items: start !important;
+  }
+
+  .panel-header .actions,
+  .document-toolbar,
+  .module-toolbar,
+  .module-result-header,
+  .doc-card-head,
+  .doc-actions,
+  .module-form-actions,
+  .invoice-summary,
+  .customer-form-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+
+  .panel-header .actions .btn,
+  .document-toolbar .btn,
+  .module-toolbar .btn,
+  .doc-actions .btn,
+  .module-form-actions .btn,
+  .customer-form-actions .btn,
+  .compact-select,
+  #docTypeFilter,
+  #servicePicker {
+    width: 100% !important;
+  }
+
+  .dashboard-grid,
+  .two-col,
+  .form-grid,
+  .contacts-grid,
+  .module-shell,
+  .automation-layout,
+  .code-action-shell,
+  .code-action-actions {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .status-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .stat {
+    min-height: 96px !important;
+    padding: 14px !important;
+    border-radius: 12px !important;
+  }
+
+  .doc-list {
+    gap: 12px !important;
+  }
+
+  .doc-card {
+    padding: 14px !important;
+    border-radius: 12px !important;
+  }
+
+  .workflow-strip,
+  .segmented-control {
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: max-content !important;
+    grid-template-columns: none !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    padding: 2px 2px 8px !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .workflow-strip::-webkit-scrollbar,
+  .segmented-control::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .workflow-step,
+  .segmented-control button {
+    min-height: 40px !important;
+    border-radius: 10px !important;
+    white-space: nowrap !important;
+  }
+
+  .item-row {
+    display: grid !important;
+    grid-template-columns: 1fr 88px !important;
+    gap: 8px !important;
+    align-items: stretch !important;
+    padding: 12px !important;
+    border-radius: 12px !important;
+  }
+
+  .item-row > div,
+  .item-row input {
+    min-width: 0 !important;
+  }
+
+  .item-row > div:nth-child(2),
+  .item-row > div:nth-child(3),
+  .item-row > div:nth-child(4),
+  .item-row > div:nth-child(5) {
+    grid-column: auto !important;
+  }
+
+  .item-row > div:nth-child(2) {
+    grid-column: 1 / -1 !important;
+  }
+
+  .item-row > div:nth-child(5) {
+    text-align: left !important;
+    align-self: center !important;
+  }
+
+  .item-row-handle,
+  .item-row > div:nth-child(6) {
+    display: none !important;
+  }
+
+  .automation-trigger-block,
+  .automation-block {
+    grid-template-columns: 34px minmax(0, 1fr) !important;
+    gap: 9px !important;
+  }
+
+  .automation-trigger-block::after,
+  .automation-block:not(:last-child)::after {
+    left: 16px !important;
+  }
+
+  .automation-block-main {
+    padding: 12px !important;
+    border-radius: 12px !important;
+  }
+
+  .automation-block-head,
+  .automation-block-actions,
+  .automation-add-block {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+
+  .code-textarea {
+    min-height: 180px !important;
+    font-size: 12px !important;
+  }
+
+  .data-table-wrap,
+  .table-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .data-table th,
+  .data-table td {
+    white-space: nowrap !important;
+  }
+
+  .modal-overlay {
+    align-items: flex-end !important;
+    padding: 0 !important;
+    z-index: 2200 !important;
+  }
+
+  .modal-container {
+    width: 100vw !important;
+    height: min(92vh, 820px) !important;
+    max-height: 92vh !important;
+    border-radius: 16px 16px 0 0 !important;
+  }
+
+  .modal-header {
+    padding: 14px !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .modal-header .actions,
+  .modal-header .btn {
+    width: 100% !important;
+  }
+
+  .preview {
+    padding: 14px !important;
+  }
+
+  .paper {
+    max-width: 100% !important;
+  }
+
+  .toast-container {
+    left: 10px !important;
+    right: 10px !important;
+    bottom: calc(12px + var(--safe-bottom)) !important;
+    transform: none !important;
+    align-items: stretch !important;
+    z-index: 2400 !important;
+  }
+
+  .app:has(.nav button[data-view="settings"].active) {
+    display: block !important;
+  }
+
+  .app:has(.nav button[data-view="settings"].active) aside.sidebar,
+  .app:has(.nav button[data-view="settings"].active) .topbar {
+    display: none !important;
+  }
+
+  .app:has(.nav button[data-view="settings"].active) .main {
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .settings-hero {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    padding: 20px 14px 18px !important;
+  }
+
+  .settings-back {
+    margin-bottom: 18px !important;
+  }
+
+  .settings-hero h2 {
+    font-size: 34px !important;
+    line-height: 1.04 !important;
+  }
+
+  .settings-hero p {
+    font-size: 14px !important;
+  }
+
+  .settings-layout {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    padding: 14px 14px calc(24px + var(--safe-bottom)) !important;
+  }
+
+  .settings-nav-panel {
+    position: static !important;
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: max-content !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    padding: 8px !important;
+    border-radius: 12px !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .settings-nav-panel::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .settings-nav-panel button {
+    min-height: 40px !important;
+    white-space: nowrap !important;
+  }
+
+  .settings-band,
+  .settings-section,
+  .settings-card {
+    border-radius: 12px !important;
+  }
+
+  .settings-band,
+  .settings-grid,
+  .settings-metrics {
+    grid-template-columns: 1fr !important;
+  }
+
+  .settings-band,
+  .settings-section-head,
+  .settings-card {
+    padding: 14px !important;
+  }
+
+  .settings-section > .settings-card,
+  .settings-section > .settings-grid {
+    margin: 12px !important;
+  }
+
+  .settings-section-head,
+  .settings-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: stretch !important;
+  }
+
+  .settings-actions .btn {
+    width: 100% !important;
   }
 }

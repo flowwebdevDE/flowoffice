@@ -1,5 +1,7 @@
 // HINWEIS: Dies ist kein sicherer Login. Das Passwort kann im Code eingesehen werden.
     const MASTER_PASSWORD = 'flow'; // Ändere dieses Passwort für einen einfachen Schutz.
+    const APP_VERSION = '2.4';
+    const BACKUP_SCHEMA_VERSION = 4;
 
     const STORAGE_KEYS = {
       settings: 'flowOffice.settings',
@@ -222,6 +224,55 @@
     function getModuleByView(view) {
       const moduleId = view.startsWith('module:') ? view.slice(7) : view;
       return getRegisteredModules().find(moduleConfig => moduleConfig.id === moduleId) || null;
+    }
+
+    function formatBytes(bytes) {
+      if (!bytes) return '0 KB';
+      const units = ['B', 'KB', 'MB', 'GB'];
+      let value = bytes;
+      let unitIndex = 0;
+      while (value >= 1024 && unitIndex < units.length - 1) {
+        value /= 1024;
+        unitIndex += 1;
+      }
+      return `${value.toFixed(value >= 10 || unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
+    }
+
+    function estimateFlowStorageBytes() {
+      return Object.keys(localStorage)
+        .filter(key => key.startsWith('flowOffice.'))
+        .reduce((total, key) => total + key.length + (localStorage.getItem(key) || '').length, 0);
+    }
+
+    function refreshSettingsOverview() {
+      const docs = getDocuments();
+      const clients = getClients();
+      const modules = getRegisteredModules();
+      const visibleModules = modules.filter(isModuleVisible);
+      const automations = getAutomations();
+      const codeActions = getCodeActions();
+      const storageBytes = estimateFlowStorageBytes();
+      const storagePercent = Math.min(100, Math.max(4, Math.round((storageBytes / (1024 * 1024 * 5)) * 100)));
+
+      const values = {
+        settingsVersion: APP_VERSION,
+        settingsVersionInline: APP_VERSION,
+        settingsDocCount: docs.length,
+        settingsClientCount: clients.length,
+        settingsModuleCount: visibleModules.length,
+        settingsAutomationCount: automations.length,
+        settingsRegisteredModules: modules.length,
+        settingsCodeActionCount: codeActions.length,
+        settingsStorageSize: formatBytes(storageBytes)
+      };
+
+      Object.entries(values).forEach(([id, value]) => {
+        const target = el(id);
+        if (target) target.textContent = value;
+      });
+
+      const storageBar = el('settingsStorageBar');
+      if (storageBar) storageBar.style.width = `${storagePercent}%`;
     }
 
     function getModuleRuntime(moduleId) {
@@ -1978,6 +2029,7 @@
       };
       localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(settings));
       renderPreview();
+      refreshSettingsOverview();
       showToast('Firmendaten gespeichert');
     }
 
@@ -2975,7 +3027,7 @@
         editor: { title: 'Editor', subtitle: 'Details eingeben und Vorschau prüfen.' },
         documents: { title: 'Dokumente', subtitle: 'Historie und Vorlagen.' },
         clients: { title: 'Kunden', subtitle: 'Adressbuch und Notizen.' },
-        settings: { title: 'Firmendaten', subtitle: 'Deine internen Stammdaten für alle Dokumente.' }
+        settings: { title: 'Einstellungen', subtitle: 'System, Daten und Stammdaten verwalten.' }
       };
       const moduleConfig = getModuleByView(view);
       const meta = moduleConfig ? {
@@ -2999,6 +3051,8 @@
           renderDocuments(searchTerm);
       } else if (view === 'clients') {
           renderClients(searchTerm);
+      } else if (view === 'settings') {
+          refreshSettingsOverview();
       } else if (moduleConfig) {
           renderModuleView(moduleConfig, searchTerm);
       }
@@ -3092,7 +3146,7 @@
 
     function downloadBackup() {
       const data = {
-        version: 4,
+        version: BACKUP_SCHEMA_VERSION,
         documents: getDocuments(),
         clients: getClients(),
         modules: getAllModuleBackupData(),
@@ -3150,6 +3204,7 @@
           renderClients();
           resetEditor();
           renderDashboard();
+          refreshSettingsOverview();
           const activeView = document.querySelector('.nav button.active')?.dataset.view || 'editor';
           const activeModule = getModuleByView(activeView);
           if (activeModule) renderModuleView(activeModule, el('globalSearchInput').value.toLowerCase());
@@ -3202,11 +3257,29 @@
       el('importBackupInput').addEventListener('change', handleBackupImport);
       el('saveSettingsBtn').addEventListener('click', saveSettings);
       el('themeToggleBtn').addEventListener('click', toggleTheme);
+      el('settingsThemeToggleBtn').addEventListener('click', () => {
+        toggleTheme();
+        refreshSettingsOverview();
+      });
       el('logoutBtn').addEventListener('click', () => {
         sessionStorage.removeItem('isLoggedIn');
         window.location.reload();
       });
       el('logoInput').addEventListener('change', handleLogoUpload);
+
+      document.querySelectorAll('[data-settings-view]').forEach(button => {
+        button.addEventListener('click', () => switchView(button.dataset.settingsView || 'editor'));
+      });
+
+      document.querySelectorAll('[data-settings-anchor]').forEach(button => {
+        button.addEventListener('click', () => {
+          const target = el(button.dataset.settingsAnchor);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.querySelectorAll('[data-settings-anchor]').forEach(item => {
+            item.classList.toggle('active', item === button);
+          });
+        });
+      });
 
       // Client Modal Actions
       el('newClientBtn').addEventListener('click', () => openClientModalForCreate());
@@ -3298,6 +3371,7 @@
         renderDocuments();
         renderClients();
         resetEditor();
+        refreshSettingsOverview();
       });
 
       resetEditor();
